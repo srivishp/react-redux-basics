@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+This app requires Redux and React-Redux. Install the same with ``` npm install redux react-redux ```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
