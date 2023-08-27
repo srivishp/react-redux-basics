@@ -1,15 +1,32 @@
 // IMPORT REDUX
-import redux, { createStore } from "redux";
+import { createStore } from "redux";
+
+const initialState = { counter: 0, showCounter: true };
 
 // REDUCER (different from useReducer)
-// gvging default value for state
-const counterReducer = (state = { counter: 0 }, action) => {
+// giving default value for state
+const counterReducer = (state = initialState, action) => {
   if (action.type === "increment") {
-    return { counter: state.counter + 1 };
+    return { counter: state.counter + 1, showCounter: state.showCounter };
   }
 
   if (action.type === "decrement") {
-    return { counter: state.counter - 1 };
+    return { counter: state.counter - 1, showCounter: state.showCounter };
+  }
+
+  // Receiving counter value from the component
+  if (action.type === "increaseByFive") {
+    return {
+      counter: state.counter + action.value,
+      showCounter: state.showCounter,
+    };
+  }
+
+  if (action.type === "toggle") {
+    return {
+      counter: state.counter,
+      showCounter: !state.showCounter,
+    };
   }
 
   return state;
