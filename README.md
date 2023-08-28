@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This app requires Redux and React-Redux. Install the same with ``` npm install redux react-redux ```
+This app requires Redux, React-Redux and Redux Toolkit. Install the same with ``` npm install redux react-redux ``` and ```npm install @reduxjs/toolkit```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
