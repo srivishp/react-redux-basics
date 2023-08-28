@@ -1,11 +1,12 @@
 import { createStore } from "redux";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = { counter: 0, showCounter: true };
 
+// * REDUCER WITH REDUX TOOLKIT
 // redux toolkit allows us to use 'slices' of the gloabal state
 // createSlice() needs object as an argument
-createSlice({
+const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
@@ -20,7 +21,10 @@ createSlice({
       state.counter--;
     },
     increaseByFive(state, action) {
-      state.counter = state.counter + action.value;
+      //state.counter = state.counter + action.value;
+
+      // TODO: See Counter.js for explanation
+      state.counter = state.counter + action.payload;
     },
     toggle(state) {
       state.showCounter = !state.showCounter;
@@ -28,43 +32,59 @@ createSlice({
   },
 });
 
-// REDUCER (different from useReducer)
-// giving default value for state
-// ! Only the Reducer can change the data/state
-const counterReducer = (state = initialState, action) => {
-  // * We CANNOT/SHOULD NOT mutate the data in the state, hence data will not be merged into the previous state
-  // but it will be overridden with the updated state by the reducer
-  // ! We cannot mutate state by doing state.counter++
-  // state must always be returned, the old object will be deleted and a new one will be created
+// // * REDUCER (different from useReducer)
+// // giving default value for state
+// // ! Only the Reducer can change the data/state
+// const counterReducer = (state = initialState, action) => {
+//   // * We CANNOT/SHOULD NOT mutate the data in the state, hence data will not be merged into the previous state
+//   // but it will be overridden with the updated state by the reducer
+//   // ! We cannot mutate state by doing state.counter++
+//   // state must always be returned, the old object will be deleted and a new one will be created
 
-  if (action.type === "increment") {
-    return { counter: state.counter + 1, showCounter: state.showCounter };
-  }
+//   if (action.type === "increment") {
+//     return { counter: state.counter + 1, showCounter: state.showCounter };
+//   }
 
-  if (action.type === "decrement") {
-    return { counter: state.counter - 1, showCounter: state.showCounter };
-  }
+//   if (action.type === "decrement") {
+//     return { counter: state.counter - 1, showCounter: state.showCounter };
+//   }
 
-  if (action.type === "increaseByFive") {
-    return {
-      // Receiving counter value from the component
-      counter: state.counter + action.value,
-      showCounter: state.showCounter,
-    };
-  }
+//   if (action.type === "increaseByFive") {
+//     return {
+//       // Receiving counter value from the component
+//       counter: state.counter + action.value,
+//       showCounter: state.showCounter,
+//     };
+//   }
 
-  if (action.type === "toggle") {
-    return {
-      counter: state.counter,
-      showCounter: !state.showCounter,
-    };
-  }
+//   if (action.type === "toggle") {
+//     return {
+//       counter: state.counter,
+//       showCounter: !state.showCounter,
+//     };
+//   }
 
-  return state;
-};
+//   return state;
+// };
 
-// REDUX STORE
-const store = createStore(counterReducer);
+// // * REDUX STORE
+// // const store = createStore(counterReducer);
+
+// * REDUX STORE WITH REDUX TOOLKIT
+//Connecting slice to redux store
+// store only accepts one reducer, but the reducer has multiple slices
+// To tackle this, we use configureStore
+const store = configureStore({
+  // In case of multiple reducers, configureStore will merge all of them in the background into one big reducer
+  // An object with key-value pairs should be provided as counter: {key1:value1...}
+  // We won't need that in this scenario as we onlt have one reducer
+  reducer: counterSlice.reducer,
+});
+
+// * DISPATCHING ACTIONS WITH REDUX TOOLKIT
+// createSlice provides actions that can be readily accessed & dispatched
+// So we have to export the actions as well, when using redux toolkit
+export const counterActions = counterSlice.actions;
 
 // we have to provide the store to the react app
 export default store;
