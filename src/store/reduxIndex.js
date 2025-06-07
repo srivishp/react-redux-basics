@@ -4,7 +4,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 const initialState = { counter: 0, showCounter: true };
 
 // * REDUCER WITH REDUX TOOLKIT
-// redux toolkit allows us to use 'slices' of the gloabal state
+// redux toolkit allows us to use 'slices' of the global state
 // createSlice() needs object as an argument
 const counterSlice = createSlice({
   name: "counter",
@@ -77,7 +77,7 @@ const counterSlice = createSlice({
 const store = configureStore({
   // In case of multiple reducers, configureStore will merge all of them in the background into one big reducer
   // An object with key-value pairs should be provided as counter: {key1:value1...}
-  // We won't need that in this scenario as we onlt have one reducer
+  // We won't need that in this scenario as we only have one reducer
   reducer: counterSlice.reducer,
 });
 
