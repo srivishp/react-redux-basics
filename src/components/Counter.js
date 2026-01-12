@@ -35,8 +35,8 @@ const Counter = () => {
 
     // payload can be added in the () directly or as an object
     dispatch(counterActions.increaseByFive(5));
-    // TODO: Here the payload is stored as payload: and not a variable name set by the developer
-    // TODO: It is done by toolkit in the background. So we have to change action.value to action.payload in the slice
+    //> Here the payload is stored as payload: and not a variable name set by the developer
+    //> It is done by toolkit in the background. So we have to change action.value to action.payload in the slice
   };
 
   return (

@@ -23,7 +23,7 @@ const counterSlice = createSlice({
     increaseByFive(state, action) {
       //state.counter = state.counter + action.value;
 
-      // TODO: See Counter.js for explanation
+      //> See Counter.js for explanation
       state.counter = state.counter + action.payload;
     },
     toggle(state) {
